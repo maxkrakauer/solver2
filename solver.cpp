@@ -897,10 +897,17 @@ complex<double>_coma, _comb, _comc;
             vector<RealUnit>units=_units;
             int len=units.size();
             for(int i=0;i<len;i++){
-                if(units[i]._exponent==2)
+                if(units[i]._exponent==2 && units[i]._coeff!=0)
                 return 2;
-                else if(units[i]._exponent==1)
+                else if(units[i]._exponent==1 && units[i]._coeff!=0)
                 expo=1;
+            }
+            if(expo==0){
+                 for(int i=0;i<len;i++){
+                     if(units[i]._exponent==0 && units[i]._coeff!=0)
+                     throw "no answer";
+                    
+            }
             }
             return expo;
         }
