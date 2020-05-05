@@ -182,6 +182,40 @@ namespace solver{
         EquationC operator==(complex<double>x, ComplexUnit y);
 
 
+
+        EquationR operator==(RealVariable x, double y);
+
+        EquationC operator==(ComplexVariable x, complex<double>y);
+
+        EquationR operator==(double x, RealVariable y);
+
+        EquationC operator==(complex<double>x, ComplexVariable y);
+
+        EquationR operator==(RealVariable x, RealVariable y);
+
+        EquationC operator==(ComplexVariable x, ComplexVariable y);
+
+        EquationR operator==(RealVariable x, RealUnit y);
+
+        EquationC operator==(ComplexVariable x, ComplexUnit y);
+
+        EquationR operator==(RealUnit x, RealVariable y);
+
+        EquationC operator==(ComplexUnit x, ComplexVariable y);
+
+        EquationR operator==(RealVariable x, RealVec y);
+
+        EquationC operator==(ComplexVariable x, ComplexVec y);
+
+        EquationR operator==(RealVec x, RealVariable y);
+
+        EquationC operator==(ComplexVec x, ComplexVariable y);
+
+
+
+
+
+
         RealVec operator+(RealVariable x);
 
         ComplexVec operator+(ComplexVariable x);
@@ -279,6 +313,35 @@ namespace solver{
         RealVec operator+(RealVariable x, RealVec y);
 
         ComplexVec operator+(ComplexVariable x, ComplexVec y);
+
+
+
+
+        RealVec operator+(RealVec x, RealUnit y);
+
+        ComplexVec operator+(ComplexVec x, ComplexUnit y);
+
+        RealVec operator+(RealUnit x, RealVec y);
+
+        ComplexVec operator+(ComplexUnit x, ComplexVec y);
+
+
+        RealVec operator-(RealVec x, RealUnit y);
+
+        ComplexVec operator-(ComplexVec x, ComplexUnit y);
+
+        RealVec operator-(RealUnit x, RealVec y);
+
+        ComplexVec operator-(ComplexUnit x, ComplexVec y);
+
+
+
+        RealUnit operator/(RealVariable x, double y);
+
+        ComplexUnit operator/(ComplexVariable x, complex<double>y);
+
+
+
 
 
         RealVec operator-(RealVariable x, RealVariable y);

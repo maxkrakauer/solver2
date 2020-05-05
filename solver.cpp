@@ -291,6 +291,93 @@ complex<double>_coma, _comb, _comc;
         }
 
 
+
+
+
+
+
+        EquationR solver::operator==(RealVariable x, double y){
+            RealUnit r(x,1,1);
+            return r==y;
+        }
+
+        EquationC solver::operator==(ComplexVariable x, complex<double>y){
+            ComplexUnit c(x,1,1);
+            return c==y;
+        }
+
+        EquationR solver::operator==(double x, RealVariable y){
+            RealUnit r(y,1,1);
+            return x==r;
+        }
+
+        EquationC solver::operator==(complex<double>x, ComplexVariable y){
+            ComplexUnit c(y,1,1);
+            return x==c;
+        }
+
+        EquationR solver::operator==(RealVariable x, RealVariable y){
+            RealUnit rx(x,1,1);
+            RealUnit ry(y,1,1);
+            return rx==ry;
+        }
+
+        EquationC solver::operator==(ComplexVariable x, ComplexVariable y){
+            ComplexUnit cx(x,1,1);
+            ComplexUnit cy(y,1,1);
+            return cx==cy;
+        }
+
+        EquationR solver::operator==(RealVariable x, RealUnit y){
+            RealUnit r(x,1,1);
+            return r==y;
+        }
+
+        EquationC solver::operator==(ComplexVariable x, ComplexUnit y){
+            ComplexUnit c(x,1,1);
+            return c==y;
+        }
+
+        EquationR solver::operator==(RealUnit x, RealVariable y){
+            RealUnit r(y,1,1);
+            return x==r;
+        }
+
+        EquationC solver::operator==(ComplexUnit x, ComplexVariable y){
+            ComplexUnit c(y,1,1);
+            return x==c;
+        }
+
+        EquationR solver::operator==(RealVariable x, RealVec y){
+            RealVec r = varToRVec(x);
+            return r==y;
+        }
+
+        EquationC solver::operator==(ComplexVariable x, ComplexVec y){
+            ComplexVec c=varToCVec(x);
+            return c=y;
+        }
+
+        EquationR solver::operator==(RealVec x, RealVariable y){
+            RealVec r=varToRVec(y);
+            return x==r;
+        }
+
+        EquationC solver::operator==(ComplexVec x, ComplexVariable y){
+            ComplexVec c=varToCVec(y);
+            return x==c;
+        }
+
+
+
+
+
+
+
+
+
+
+
         RealVec solver::operator+(RealVariable x){
             RealVec r=varToRVec(x);
             return r;
@@ -500,11 +587,15 @@ complex<double>_coma, _comb, _comc;
 
         
         RealUnit solver::operator/(RealUnit x, double y){
+            if(y==0)
+            throw "no answer";
             RealUnit r(x._variable,x._coeff/y,x._exponent);
             return r;
         }
 
         ComplexUnit solver::operator/(ComplexUnit x, complex<double>y){
+            if(imag(y)==0 && real(y)==0)
+            throw "no answer";
             ComplexUnit c(x._variable,x._coeff/y,x._exponent);
             return c;
         }
@@ -518,6 +609,26 @@ complex<double>_coma, _comb, _comc;
             ComplexUnit c(x._variable,x._coeff/y._coeff,x._exponent-y._exponent);
             return c;
         }
+
+
+
+
+         RealUnit solver::operator/(RealVariable x, double y){
+             if (y==0)
+             throw "no asnwer";
+             RealUnit r(x,1/y,0);
+             return r;
+         }
+
+        ComplexUnit solver::operator/(ComplexVariable x, complex<double>y){
+            if(real(y)==0 && imag(y)==0)
+            throw "no answer";
+            ComplexUnit c(x,1.0/y,0);
+            return c;
+        }
+
+
+
 
 
         RealVec solver::operator+(RealVariable x, RealVariable y){
@@ -662,6 +773,51 @@ complex<double>_coma, _comb, _comc;
             ComplexUnit cy(y,1,1);
             return cx+cy;
         }
+
+
+
+
+        RealVec solver::operator+(RealVec x, RealUnit y){
+            RealVec r=unitToRVec(y);
+            return x+r;
+        }
+
+        ComplexVec solver::operator+(ComplexVec x, ComplexUnit y){
+            ComplexVec c=unitToCVec(y);
+            return x+c;
+        }
+
+        RealVec solver::operator+(RealUnit x, RealVec y){
+            RealVec r=unitToRVec(x);
+            return r+y;
+        }
+
+        ComplexVec solver::operator+(ComplexUnit x, ComplexVec y){
+            ComplexVec c=unitToCVec(x);
+            return c+y;
+        }
+
+
+        RealVec solver::operator-(RealVec x, RealUnit y){
+            RealVec r=unitToRVec(y);
+            return x-r;
+        }
+
+        ComplexVec solver::operator-(ComplexVec x, ComplexUnit y){
+           ComplexVec c=unitToCVec(y);
+           return x-c;
+        }
+
+        RealVec solver::operator-(RealUnit x, RealVec y){
+            RealVec r=unitToRVec(x);
+            return r-y;
+        }
+
+        ComplexVec solver::operator-(ComplexUnit x, ComplexVec y){
+            ComplexVec c=unitToCVec(x);
+            return c-y;
+        }
+
 
 /*
         RealVec solver::operator+(RealUnit x, double y){
